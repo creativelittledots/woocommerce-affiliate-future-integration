@@ -57,7 +57,7 @@ class WC_AF_Integration_Functions {
             
             $order = wc_get_order($order_id);
         
-            wp_enqueue_script( 'af-js', '//scripts.affiliatefuture.com/AFFunctions.js', array(), '1.0.0', true );
+            wp_enqueue_script( 'af-js', 'http://scripts.affiliatefuture.com/AFFunctions.js', array(), '1.0.0', true );
             
             wp_enqueue_script( 'af-js-process', WC_AF_Integration()->plugin_url() . '/assets/js/af-js-process.js', array('jquery', 'af-js'), '1.0.0', true );
             
@@ -65,7 +65,7 @@ class WC_AF_Integration_Functions {
                 'merchantID' => $merchant_id,
                 'payoutCodes' => '',
                 'offlineCode' => '',
-                'orderValue' => $af_settings['total_type'] === 'total' ? round($order->get_total(), 2) : round($order->get_subtotal(), 2),
+                'orderValue' => $af_settings['total_type'] === 'total' ? $order->get_total() : $order->get_subtotal(),
                 'orderRef' => $order->get_order_number(),
             ));
             
