@@ -65,7 +65,7 @@ class WC_AF_Integration_Functions {
                 'merchantID' => $merchant_id,
                 'payoutCodes' => '',
                 'offlineCode' => '',
-                'orderValue' => $af_settings['total_type'] === 'total' ? $order->get_total() : $order->get_subtotal(),
+                'orderValue' => $af_settings['total_type'] === 'total' ? round($order->get_total(), 2) : round($order->get_subtotal(), 2),
                 'orderRef' => $order->get_order_number(),
             ));
             
@@ -85,7 +85,7 @@ class WC_AF_Integration_Functions {
             
             wc_get_template( 'image.php', array(
                 'order_number' => $order->get_order_number(),
-                'order_value' => $af_settings['total_type'] === 'total' ? $order->get_total() : $order->get_subtotal(),
+                'order_value' => $af_settings['total_type'] === 'total' ? round($order->get_total(), 2) : round($order->get_subtotal(), 2),
                 'merchant_id' => $merchant_id
             ), '', WC_AF_Integration()->plugin_path() . '/templates/' );
             
