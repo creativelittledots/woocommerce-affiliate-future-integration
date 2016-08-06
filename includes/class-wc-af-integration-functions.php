@@ -41,39 +41,11 @@ class WC_AF_Integration_Functions {
     	
     	if( ! $payment_method_added ) {
         	
-        	add_action( 'woocommerce_thankyou', array($this, 'add_payment_method_action') );
-        	
         	add_action( 'woocommerce_thankyou', array($this, 'print_image') );
         	
     	}
     	
 	}
-	
-    public function add_payment_method_action($order_id) {
-        
-        global $af_settings;
-        
-        if( $merchant_id = $af_settings['merchant_id'] ) {
-            
-            $order = wc_get_order($order_id);
-        
-            wp_enqueue_script( 'af-js', 'http://scripts.affiliatefuture.com/AFFunctions.js', array(), '1.0.0', true );
-            
-            wp_enqueue_script( 'af-js-process', WC_AF_Integration()->plugin_url() . '/assets/js/af-js-process.js', array('jquery', 'af-js'), '1.0.0', true );
-            
-            wp_localize_script( 'af-js-process', 'afOptions', array(
-                'merchantID' => $merchant_id,
-                'payoutCodes' => '',
-                'offlineCode' => '',
-                'orderValue' => $af_settings['total_type'] === 'total' ? round($order->get_total(), 2) : round($order->get_subtotal(), 2),
-                'orderRef' => $order->get_order_number(),
-            ));
-            
-            wp_enqueue_script( 'af-js-process' );
-            
-        }
-    	 
-    }
     
     public function print_image($order_id) {
         
