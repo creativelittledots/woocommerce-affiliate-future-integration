@@ -4,7 +4,7 @@ Affiliate Future integration with Woocommerce, allowing shop owners to track sal
 
 Simply set you your Affiliate Future settings in **WooCommerce > Settings > Integrations > Affiliate Future** and all of the required order information will back tracked back to your Affiliate Future account.
 
-Currently using the AFSaleV2 facility, there is a filter provided that you can use called **wc_af_sale_v2_query_args** to customise the parameters in the URL should you need t customise some the parameters:
+Currently using the AFSaleV2 facility, there is a filter provided that you can use called **wc_af_sale_v2_query_args** to customise the parameters in the URL should you need to customise some the parameters:
 
 ```php
 $url = add_query_arg(apply_filters('wc_af_sale_v2_query_args', array(
