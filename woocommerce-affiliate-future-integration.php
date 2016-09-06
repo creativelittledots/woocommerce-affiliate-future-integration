@@ -1,8 +1,8 @@
 <?php
 /*
 * Plugin Name: WooCommerce Affiliate Future Integration
-* Description: A plugin built for Affiliate Future, allowing Wordpress & Woocommerce blog owners to track sales on the Woocommerce Order Thank You page.
-* Version: 1.0
+* Description: Affiliate Future integration with Woocommerce, allowing shop owners to track sales via tracking on the Woocommerce Order Received page
+* Version: 1.0.o
 * Author: Creative Little Dots
 * Author URI: http://creativelittledots.co.uk
 * Text Domain: woocommerce-affiliate-future-integration
