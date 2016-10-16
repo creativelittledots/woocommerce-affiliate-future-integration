@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h2 id="woocommerceaffiliatefutureintegration">WooCommerce Affiliate Future Integration</h2>
+
+<p>Affiliate Future integration with Woocommerce, allowing shop owners to track sales via tracking on the Woocommerce Order Received page</p>
+
+<p>Simply set you your Affiliate Future settings in <strong>WooCommerce &gt; Settings &gt; Integrations &gt; Affiliate Future</strong> and all of the required order information will back tracked back to your Affiliate Future account.</p>
+
+<p>Currently using the AFSaleV2 facility, there is a filter provided that you can use called <strong>wc_af_sale_v2_query_args</strong> to customise the parameters in the URL should you need to customise some the parameters:</p>
+
+<pre><code class="php">$url = add_query_arg(apply_filters('wc_af_sale_v2_query_args', array(
+    'orderID' =&gt; $order-&gt;get_order_number(),
+    'orderValue' =&gt; $af_settings['total_type'] === 'total' ? round($order-&gt;get_total(), 2) : round($order-&gt;get_subtotal(), 2),
+    'merchant' =&gt; $merchant_id,
+    'offlineCode' =&gt; '',
+    'voucher' =&gt; implode(',', $order-&gt;get_used_coupons()),
+    'payoutCodes' =&gt; '',
+    'products' =&gt; '',
+    'r' =&gt; '',
+    'img' =&gt; 'yes'
+), $af_settings, $order), '//scripts.affiliatefuture.com/AFSaleV2.asp');
+</code></pre>
+
+<p>Which can be used in functions.php like this:</p>
+
+<pre><code class="php">add_filter( 'wc_af_sale_v2_query_args', 'custom_af_args', 10, 3 );
+
+function custom_af_args( $args, $af_settings, $order ) {
+    
+    return array_merge($args, array(
+        'some_arbitrary' =&gt; 'text'
+    ));
+    
+    // results in a request to http://scripts.affiliatefuture.com/AFSaleV2.asp?orderID={{order_id}}&amp;orderValue={{order_value}}&amp;merchant={{merchant_id}}&amp;voucher={{voucher_codes}}payoutCodes=&amp;offlineCode=&amp;r=&amp;img=yes&amp;some_arbitrary=text
+    
+}
+</code></pre>
+
+<h2 id="installation">Installation</h2>
+
+<ol>
+<li>Upload the plugin to the <strong>/wp-content/plugins/</strong> directory</li>
+<li>Activate the plugin through the &#8216;Plugins&#8217; menu in WordPress</li>
+</ol>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>An account with <a href="http://www.affiliatefuture.co.uk/register/publishers">Affiliate Future</a></p>
+
+<p>PHP 5.4+</p>
+
+<p>Wordpress 4+</p>
+
+<p>WooCommerce 2.5+</p>
+
+<h2 id="license">License</h2>
+
+<p><a href="http://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3.0</a></p>
+
+</body>
+</html>
