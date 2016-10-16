@@ -63,7 +63,7 @@ class WC_AF_Integration_Functions {
 
     public function add_payment_methods_action() {
         
-        if( $_COOKIE['adnetwork'] === 'AF' || 1 == 1 ) {
+        if( ! empty( $_COOKIE['adnetwork'] ) && $_COOKIE['adnetwork'] === 'AF' ) {
         	
         	global $af_settings;
         	
