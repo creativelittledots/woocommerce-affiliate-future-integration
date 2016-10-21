@@ -101,7 +101,7 @@ class WC_AF_Integration_Functions {
         
             $order = wc_get_order($order_id);
             
-            $url = add_query_arg(apply_filters('wc_af_sale_v2_query_args', array(
+            $url = $this->build_url(apply_filters('wc_af_sale_v2_query_args', array(
                 'orderID' => $order->get_order_number(),
                 'orderValue' => $af_settings['total_type'] === 'total' ? round($order->get_total(), 2) : round($order->get_subtotal(), 2),
                 'merchant' => $merchant_id,
@@ -116,6 +116,12 @@ class WC_AF_Integration_Functions {
             wc_get_template( 'image.php', compact('url'), '', WC_AF_Integration()->plugin_path() . '/templates/' );
             
         }
+        
+    }
+    
+    public function build_url($args, $url) {
+        
+        return $url . '?' . urldecode(http_build_query($args));
         
     }
 
